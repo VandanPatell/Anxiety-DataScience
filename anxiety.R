@@ -58,6 +58,10 @@ questions <- subset(questions ,select =  -c(max))
 
 questions$max <- colnames(questions)[apply(questions,1,which.max )]
 
+colnames(questions)[41]
+
+?apply
+
 questions$max <- ifelse(questions$max == "d1" , "1", 
                         ifelse(questions$max == "d2","2",
                                ifelse(questions$max == "d3" , "3","4")))
@@ -68,7 +72,26 @@ data$major <- ifelse( data$major == "" , "Never opt for major", data$major)
 
 library(ggplot2)
 
-ggplot(data , aes(x = depression.lvl,y=age)) + geom_line()
+ggplot(data , aes(x = depression.lvl,y=age)) + geom_bar() + facet_wrap(facets=vars(gender.fix))
+
+data$depression.lvl <- ifelse(data$depression.lvl == "1" , "Less or not depressed", 
+                        ifelse(data$depression.lvl == "2","Moderately depressed",
+                               ifelse(data$depression.lvl == "3" , "Depressed at some extent","Highly Depressed")))
+
+library(rpart)
+
+formula_d <- "depression.lvl ~ Q1A + Q2A + Q3A + Q4A + Q5A"
+
+model <- rpart(
+    formula_d,
+    data = data,
+    control = rpart.control(maxdepth = 5),
+    method = "class"
+)
+
+library(rpart.plot)
+rpart.plot(model)
+
 
 #--------------------------------------------------------------------------------------
 data$TIPI1 <- ifelse(data$TIPI1 == 1 , "Disagree strongly", ifelse(data$TIPI1 == 2 ,'Disagree moderately',ifelse(data$TIPI1 == 3 ,'Disagree a little',ifelse(data$TIPI1 == 4 ,'Neither agree nor disagree',ifelse(data$TIPI1 == 5 ,'Agree a little',ifelse(data$TIPI1 == 6 ,'Agree moderately','Agree strongly'))))))
