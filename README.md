@@ -22,7 +22,14 @@ setwd('/Users/exam/Downloads')
 data <- read.csv('data.csv',sep = "\t")
 ```
 
-### 
+### Cleaning the dataset
+
+```R
+# create a dataframe without outliers based on the condition that the user did not knew the definations of word 6, 9 & 12.
+data_final <- subset(data, !( (data$VCL6==1 & data$VCL9==1 & data$VCL12==1) | (data$VCL6==1 & data$VCL9==1) | (data$VCL9==1 & data$VCL12==1) | (data$VCL6==1 & data$VCL12==1 )))
+```
+
+###
 
 
 ### Questions in Survey
