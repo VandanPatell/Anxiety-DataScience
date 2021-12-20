@@ -11,9 +11,21 @@ This data was collected with a online version of the Depression Anxiety Stress S
 2. [data.csv](https://github.com/VandanPatell/Anxiety-DataScience/blob/main/data.csv) - CSV file that contains raw data
 3. [codebook.txt](https://github.com/VandanPatell/Anxiety-DataScience/blob/main/codebook.txt) - Guide book to dataset
 
+## Code Snippets
+
+### Loading Data into R
+
+```R
+# set working directory to the location where dataset/project is located.
+setwd('/Users/exam/Downloads')
+# create dataframe data using read.csv() function 
+data <- read.csv('data.csv',sep = "\t")
+```
+
+### 
 
 
-## Questions in Survey
+### Questions in Survey
 
 + Q1	I found myself getting upset by quite trivial things.
 + Q2	I was aware of dryness of my mouth.
